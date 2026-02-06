@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Rose Day, My Love, My Qalb Allaiha,My Baby! 🌹</title>
+    <style>
+        .photo-caption {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 1.2em;
+  color: #d63384;
+  font-weight: bold;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .page {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        .page.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Page 1 Styles */
+        .page1-content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .page1-content h1 {
+            font-size: 3em;
+            color: #d63384;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .button-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .btn-yes, .btn-no {
+            padding: 15px 40px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #ff6b9d 0%, #d63384 100%);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(214, 51, 132, 0.4);
+        }
+
+        .btn-no {
+            background: #f8f9fa;
+            color: #6c757d;
+            position: relative;
+        }
+
+        /* Page 2 Styles */
+        .page2-content {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            gap: 60px;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .rose-bouquet, .envelope-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .rose-bouquet:hover, .envelope-container:hover {
+            transform: scale(1.1);
+        }
+
+        .rose-bouquet svg {
+            width: 300px;
+            height: 300px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+        }
+
+        .envelope {
+            width: 280px;
+            height: 200px;
+            position: relative;
+        }
+
+        .envelope-back {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border: 3px solid #d63384;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .envelope-flap {
+            width: 0;
+            height: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 100px solid #ff6b9d;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: top center;
+            transition: transform 0.6s ease;
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .letter {
+            position: fixed;
+            width: 500px;
+            max-width: 90vw;
+            height: 600px;
+            max-height: 80vh;
+            background: #fffef7;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+            overflow-y: auto;
+            font-size: 1em;
+            line-height: 1.8;
+            color: #333;
+            z-index: 1000;
+            border: 2px solid #d63384;
+        }
+
+        .envelope.open .letter {
+            opacity: 1;
+            pointer-events: all;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .letter-content {
+            white-space: pre-line;
+            font-family: 'Brush Script MT', cursive, 'Georgia', serif;
+            font-size: 1.1em;
+        }
+
+        .letter-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff6b9d;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .letter-close:hover {
+            background: #d63384;
+            transform: rotate(90deg);
+        }
+
+        .back-button {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #d63384;
+            border: 2px solid #d63384;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-button:hover {
+            background: #d63384;
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        .page1 .back-button {
+            display: none;
+        }
+
+        .envelope-container-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Page 3 - Letter and Gift Button Styles */
+        .page3-content-letter {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            gap: 60px;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .letter-display {
+            flex: 1;
+            background: #fffef7;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            border: 2px solid #d63384;
+        }
+
+        .letter-content-static {
+            white-space: pre-line;
+            font-family: 'Brush Script MT', cursive, 'Georgia', serif;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .gift-button-container {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-gift {
+            padding: 20px 40px;
+            font-size: 1.5em;
+            background: linear-gradient(135deg, #ff6b9d 0%, #d63384 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(214, 51, 132, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-gift:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(214, 51, 132, 0.6);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Page 4 - Bouquet Styles */
+        .page4-content-bouquet {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        /* Page 3 Styles */
+        .page3-content {
+            text-align: center;
+            padding: 40px;
+            width: 90%;
+            max-width: 900px;
+            cursor: pointer;
+        }
+
+        .photo-frame {
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16/9;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .photo-text {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.3em;
+            color: #d63384;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        /* Page 4 Styles */
+        .page4-content {
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        .page4-content h2 {
+            font-size: 2.5em;
+            color: #d63384;
+            margin-bottom: 50px;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            color: #d63384;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        /* Floating hearts animation */
+        .heart {
+            position: fixed;
+            font-size: 2em;
+            animation: float 8s infinite;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { 
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% { 
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page1-content h1 { font-size: 2em; }
+            .page2-content { flex-direction: column; gap: 40px; }
+            .page3-content-letter { flex-direction: column; gap: 30px; }
+            .rose-bouquet svg { width: 200px; height: 200px; }
+            .envelope { width: 220px; height: 160px; }
+            .page4-content h2 { font-size: 1.8em; }
+            .btn-gift { font-size: 1.2em; padding: 15px 30px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1: Initial Question -->
+    <div class="page active" id="page1">
+        <div class="page1-content">
+            <h1>Hey Baby,<br>Are You Ready for This Week?</h1>
+            <div class="button-container">
+                <button class="btn-yes" id="yesBtn1">Yes! 💕</button>
+                <button class="btn-no" id="noBtn1">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-button" id="backButton">← Back</button>
+
+    <!-- Page 2: Envelope Only -->
+    <div class="page" id="page2">
+        <div class="page2-content">
+            <div class="envelope-container-center">
+                <div class="envelope" id="envelope">
+                    <div class="envelope-back"></div>
+                    <div class="envelope-flap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 3: Letter and Gift Button -->
+    <div class="page" id="page3">
+        <div class="page3-content-letter">
+            <div class="letter-display">
+                <h2 style="color: #d63384; margin-bottom: 20px; text-align: center;">A Letter For You 💌</h2>
+                <div class="letter-content-static">My Baby Allaiha,
+
+On This Rose Day, I am Sending You This virtual Rose Bouquet now, And The Actual One You Will Get This Morning Jaan, I Just Want You To know that You Deserve All the flower Bouquets And Gardens In These world And I Will Make Sure Baby, You get all those, You Are the rose to me My love. I just want You To Know That I will love you always And Forever,
+
+Forever and always yours,
+Tabrez ❤️</div>
+            </div>
+            <div class="gift-button-container">
+                <button class="btn-gift" id="giftBtn">🎁 Click This For A Gift 🎁</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 4: Rose Bouquet -->
+    <div class="page" id="page4">
+        <div class="page4-content-bouquet">
+            <h1 style="color: #d63384; margin-bottom: 30px; text-align: center; font-size: 2.5em;">Here's The Virtual Rose For My Lady 🌹</h1>
+            <div class="rose-bouquet" id="roseBouquet">
+                <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Realistic Rose Bouquet -->
+                    <defs>
+                        <!-- Gradients for realistic roses -->
+                        <radialGradient id="roseGrad1">
+                            <stop offset="0%" style="stop-color:#ff1744;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#e91e63;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#c2185b;stop-opacity:1" />
+                        </radialGradient>
+                        <radialGradient id="roseGrad2">
+                            <stop offset="0%" style="stop-color:#ff5252;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#ff1744;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#d50000;stop-opacity:1" />
+                        </radialGradient>
+                        <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4caf50;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#2e7d32;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="stemGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#388e3c;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#2e7d32;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#1b5e20;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Stems -->
+                    <path d="M 150 120 Q 145 200 140 350" stroke="url(#stemGrad)" stroke-width="5" fill="none"/>
+                    <path d="M 120 140 Q 118 220 110 350" stroke="url(#stemGrad)" stroke-width="4.5" fill="none"/>
+                    <path d="M 180 140 Q 182 220 190 350" stroke="url(#stemGrad)" stroke-width="4.5" fill="none"/>
+                    <path d="M 100 160 Q 95 240 85 350" stroke="url(#stemGrad)" stroke-width="4" fill="none"/>
+                    <path d="M 200 160 Q 205 240 215 350" stroke="url(#stemGrad)" stroke-width="4" fill="none"/>
+                    <path d="M 130 150 Q 125 230 120 350" stroke="url(#stemGrad)" stroke-width="4" fill="none"/>
+                    <path d="M 170 150 Q 175 230 180 350" stroke="url(#stemGrad)" stroke-width="4" fill="none"/>
+                    
+                    <!-- Leaves -->
+                    <ellipse cx="135" cy="180" rx="12" ry="20" fill="url(#leafGrad)" transform="rotate(-25 135 180)"/>
+                    <ellipse cx="165" cy="180" rx="12" ry="20" fill="url(#leafGrad)" transform="rotate(25 165 180)"/>
+                    <ellipse cx="115" cy="220" rx="10" ry="18" fill="url(#leafGrad)" transform="rotate(-30 115 220)"/>
+                    <ellipse cx="185" cy="220" rx="10" ry="18" fill="url(#leafGrad)" transform="rotate(30 185 220)"/>
+                    <ellipse cx="105" cy="260" rx="9" ry="16" fill="url(#leafGrad)" transform="rotate(-35 105 260)"/>
+                    <ellipse cx="195" cy="260" rx="9" ry="16" fill="url(#leafGrad)" transform="rotate(35 195 260)"/>
+                    <ellipse cx="140" cy="240" rx="11" ry="19" fill="url(#leafGrad)" transform="rotate(-20 140 240)"/>
+                    <ellipse cx="160" cy="240" rx="11" ry="19" fill="url(#leafGrad)" transform="rotate(20 160 240)"/>
+                    
+                    <!-- Rose 1 - Center Top -->
+                    <g transform="translate(150, 80)">
+                        <!-- Outer petals -->
+                        <ellipse cx="0" cy="5" rx="18" ry="22" fill="url(#roseGrad1)" opacity="0.9"/>
+                        <ellipse cx="-8" cy="2" rx="15" ry="20" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(-20 -8 2)"/>
+                        <ellipse cx="8" cy="2" rx="15" ry="20" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(20 8 2)"/>
+                        <ellipse cx="-12" cy="8" rx="13" ry="18" fill="url(#roseGrad2)" opacity="0.8" transform="rotate(-35 -12 8)"/>
+                        <ellipse cx="12" cy="8" rx="13" ry="18" fill="url(#roseGrad2)" opacity="0.8" transform="rotate(35 12 8)"/>
+                        <!-- Inner petals -->
+                        <ellipse cx="0" cy="0" rx="12" ry="15" fill="url(#roseGrad2)" opacity="0.95"/>
+                        <ellipse cx="-5" cy="-2" rx="10" ry="12" fill="#ff1744" opacity="0.9" transform="rotate(-15 -5 -2)"/>
+                        <ellipse cx="5" cy="-2" rx="10" ry="12" fill="#ff1744" opacity="0.9" transform="rotate(15 5 -2)"/>
+                        <!-- Center -->
+                        <ellipse cx="0" cy="0" rx="6" ry="8" fill="#d50000"/>
+                        <circle cx="0" cy="0" r="3" fill="#b71c1c"/>
+                    </g>
+                    
+                    <!-- Rose 2 - Left -->
+                    <g transform="translate(110, 110)">
+                        <ellipse cx="0" cy="5" rx="16" ry="20" fill="url(#roseGrad1)" opacity="0.9"/>
+                        <ellipse cx="-7" cy="2" rx="14" ry="18" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(-25 -7 2)"/>
+                        <ellipse cx="7" cy="2" rx="14" ry="18" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(25 7 2)"/>
+                        <ellipse cx="0" cy="0" rx="11" ry="14" fill="url(#roseGrad2)" opacity="0.95"/>
+                        <ellipse cx="-4" cy="-2" rx="9" ry="11" fill="#ff1744" opacity="0.9" transform="rotate(-12 -4 -2)"/>
+                        <ellipse cx="4" cy="-2" rx="9" ry="11" fill="#ff1744" opacity="0.9" transform="rotate(12 4 -2)"/>
+                        <ellipse cx="0" cy="0" rx="5" ry="7" fill="#d50000"/>
+                        <circle cx="0" cy="0" r="2.5" fill="#b71c1c"/>
+                    </g>
+                    
+                    <!-- Rose 3 - Right -->
+                    <g transform="translate(190, 110)">
+                        <ellipse cx="0" cy="5" rx="16" ry="20" fill="url(#roseGrad1)" opacity="0.9"/>
+                        <ellipse cx="-7" cy="2" rx="14" ry="18" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(-25 -7 2)"/>
+                        <ellipse cx="7" cy="2" rx="14" ry="18" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(25 7 2)"/>
+                        <ellipse cx="0" cy="0" rx="11" ry="14" fill="url(#roseGrad2)" opacity="0.95"/>
+                        <ellipse cx="-4" cy="-2" rx="9" ry="11" fill="#ff1744" opacity="0.9" transform="rotate(-12 -4 -2)"/>
+                        <ellipse cx="4" cy="-2" rx="9" ry="11" fill="#ff1744" opacity="0.9" transform="rotate(12 4 -2)"/>
+                        <ellipse cx="0" cy="0" rx="5" ry="7" fill="#d50000"/>
+                        <circle cx="0" cy="0" r="2.5" fill="#b71c1c"/>
+                    </g>
+                    
+                    <!-- Rose 4 - Lower Left -->
+                    <g transform="translate(90, 140)">
+                        <ellipse cx="0" cy="4" rx="15" ry="18" fill="url(#roseGrad1)" opacity="0.9"/>
+                        <ellipse cx="-6" cy="2" rx="13" ry="16" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(-20 -6 2)"/>
+                        <ellipse cx="6" cy="2" rx="13" ry="16" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(20 6 2)"/>
+                        <ellipse cx="0" cy="0" rx="10" ry="12" fill="url(#roseGrad2)" opacity="0.95"/>
+                        <ellipse cx="0" cy="0" rx="5" ry="6" fill="#d50000"/>
+                        <circle cx="0" cy="0" r="2" fill="#b71c1c"/>
+                    </g>
+                    
+                    <!-- Rose 5 - Lower Right -->
+                    <g transform="translate(210, 140)">
+                        <ellipse cx="0" cy="4" rx="15" ry="18" fill="url(#roseGrad1)" opacity="0.9"/>
+                        <ellipse cx="-6" cy="2" rx="13" ry="16" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(-20 -6 2)"/>
+                        <ellipse cx="6" cy="2" rx="13" ry="16" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(20 6 2)"/>
+                        <ellipse cx="0" cy="0" rx="10" ry="12" fill="url(#roseGrad2)" opacity="0.95"/>
+                        <ellipse cx="0" cy="0" rx="5" ry="6" fill="#d50000"/>
+                        <circle cx="0" cy="0" r="2" fill="#b71c1c"/>
+                    </g>
+                    
+                    <!-- Rose 6 - Middle Left -->
+                    <g transform="translate(125, 125)">
+                        <ellipse cx="0" cy="4" rx="14" ry="17" fill="url(#roseGrad1)" opacity="0.9"/>
+                        <ellipse cx="-5" cy="1" rx="12" ry="15" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(-18 -5 1)"/>
+                        <ellipse cx="5" cy="1" rx="12" ry="15" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(18 5 1)"/>
+                        <ellipse cx="0" cy="0" rx="9" ry="11" fill="url(#roseGrad2)" opacity="0.95"/>
+                        <ellipse cx="0" cy="0" rx="4" ry="5" fill="#d50000"/>
+                    </g>
+                    
+                    <!-- Rose 7 - Middle Right -->
+                    <g transform="translate(175, 125)">
+                        <ellipse cx="0" cy="4" rx="14" ry="17" fill="url(#roseGrad1)" opacity="0.9"/>
+                        <ellipse cx="-5" cy="1" rx="12" ry="15" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(-18 -5 1)"/>
+                        <ellipse cx="5" cy="1" rx="12" ry="15" fill="url(#roseGrad1)" opacity="0.85" transform="rotate(18 5 1)"/>
+                        <ellipse cx="0" cy="0" rx="9" ry="11" fill="url(#roseGrad2)" opacity="0.95"/>
+                        <ellipse cx="0" cy="0" rx="4" ry="5" fill="#d50000"/>
+                    </g>
+                    
+                    <!-- Wrapping Paper -->
+                    <path d="M 70 350 L 80 320 L 100 340 L 120 315 L 150 335 L 180 315 L 200 340 L 220 320 L 230 350 Z" 
+                          fill="#fff" stroke="#ff6b9d" stroke-width="2" opacity="0.7"/>
+                    
+                    <!-- Ribbon -->
+                    <ellipse cx="150" cy="340" rx="80" ry="15" fill="#ff6b9d" opacity="0.9"/>
+                    <rect x="145" y="340" width="10" height="40" fill="#ff6b9d"/>
+                    <path d="M 150 380 L 120 420 L 140 390 Z" fill="#ff1744"/>
+                    <path d="M 150 380 L 180 420 L 160 390 Z" fill="#ff1744"/>
+                    
+                    <!-- Ribbon Bow -->
+                    <ellipse cx="130" cy="330" rx="20" ry="12" fill="#ff1744" transform="rotate(-30 130 330)"/>
+                    <ellipse cx="170" cy="330" rx="20" ry="12" fill="#ff1744" transform="rotate(30 170 330)"/>
+                    <circle cx="150" cy="335" r="8" fill="#d50000"/>
+                </svg>
+            </div>
+            <p style="color: #d63384; font-size: 1.3em; margin-top: 20px; text-align: center; font-style: italic;">Click The Bouquet 👆</p>
+        </div>
+    </div>
+
+    <!-- Page 5: Photo with Text -->
+    <div class="page" id="page5">
+        <div class="page3-content" id="page5ClickArea">
+            <div class="photo-frame">
+  <img src="img.jpeg" class="photo-placeholder" id="photoPlaceholder" alt="My Rose">
+</div>
+
+<div class="photo-caption">
+  To My Very Own Rose 🌹
+</div>
+<p style="margin-top: 30px; color: #d63384; font-size: 1.2em; font-style: italic;">Click anywhere to continue ❤️</p>
+</div> <!-- closes page3-content -->
+</div>   <!-- closes page5 -->
+    <!-- Page 6: Final Question -->
+    <div class="page" id="page6">
+        <div class="page4-content">
+            <h2 id="customQuestion">Baby, Will You Be My Baby And Girlfriend?</h2>
+            <div class="button-container">
+                <button class="btn-yes" id="yesBtn2">Yes Forever! 💕</button>
+                <button class="btn-no" id="noBtn2">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 7: Get Ready Message -->
+    <div class="page" id="page7">
+        <div class="page4-content">
+            <h2>Get ready for a IRL bouquet in the morning, and get ready for this best week of urs jaan 🌹<br><br>IDC if u give us a relationship tag or not but you are my girlfriend and you gotta accept that ain't you? 💕</h2>
+            <div class="button-container">
+                <button class="btn-yes" id="yesBtn3">Yes! I Accept! 💕</button>
+                <button class="btn-no" id="noBtn3">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 8: Final Love Message -->
+    <div class="page" id="page8">
+        <div class="page4-content">
+            <h2>I knew it jaan, I love you! ❤️✨</h2>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">I love you baby - Tabrez ❤️</div>
+
+    <script>
+        // Floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 3 + 's';
+            heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 10000);
+        }
+
+        setInterval(createHeart, 800);
+
+        // Page Navigation
+        let pageHistory = ['page1'];
+        
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            // Add to history if not going back
+            if (pageHistory[pageHistory.length - 1] !== pageId) {
+                pageHistory.push(pageId);
+            }
+            
+            // Update back button visibility
+            const backButton = document.getElementById('backButton');
+            if (pageId === 'page1') {
+                backButton.style.display = 'none';
+            } else {
+                backButton.style.display = 'block';
+            }
+        }
+        
+        // Back button functionality
+        document.getElementById('backButton').addEventListener('click', () => {
+            if (pageHistory.length > 1) {
+                pageHistory.pop(); // Remove current page
+                const previousPage = pageHistory[pageHistory.length - 1];
+                
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                document.getElementById(previousPage).classList.add('active');
+                
+                if (previousPage === 'page1') {
+                    document.getElementById('backButton').style.display = 'none';
+                }
+            }
+        });
+
+        // Page 1: Yes/No buttons
+        const yesBtn1 = document.getElementById('yesBtn1');
+        const noBtn1 = document.getElementById('noBtn1');
+        let noClickCount1 = 0;
+
+        yesBtn1.addEventListener('click', () => {
+            showPage('page2');
+        });
+
+        noBtn1.addEventListener('click', (e) => {
+            noClickCount1++;
+            
+            // Increase Yes button size
+            const currentSize = parseFloat(getComputedStyle(yesBtn1).fontSize);
+            yesBtn1.style.fontSize = (currentSize + 5) + 'px';
+            
+            // Move No button randomly
+            const x = Math.random() * (window.innerWidth - 200);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn1.style.position = 'absolute';
+            noBtn1.style.left = x + 'px';
+            noBtn1.style.top = y + 'px';
+            
+            // Make Yes button more prominent
+            yesBtn1.style.transform = `scale(${1 + noClickCount1 * 0.1})`;
+        });
+
+        // Page 2: Envelope click to show letter page
+        const envelope = document.getElementById('envelope');
+        
+        envelope.addEventListener('click', () => {
+            showPage('page3');
+        });
+        
+        // Page 3: Gift button click to show bouquet page
+        document.getElementById('giftBtn').addEventListener('click', () => {
+            showPage('page4');
+        });
+
+        // Page 4: Rose Bouquet click to go to photo page
+        document.getElementById('roseBouquet').addEventListener('click', () => {
+            showPage('page5');
+        });
+
+        // Page 5: Click anywhere in the content area to continue to page 6
+        document.getElementById('page5ClickArea').addEventListener('click', () => {
+            showPage('page6');
+        });
+
+        // Page 6: Yes/No buttons
+        const yesBtn2 = document.getElementById('yesBtn2');
+        const noBtn2 = document.getElementById('noBtn2');
+        let noClickCount2 = 0;
+
+        yesBtn2.addEventListener('click', () => {
+            showPage('page7');
+        });
+
+        noBtn2.addEventListener('click', () => {
+            noClickCount2++;
+            
+            // Increase Yes button size
+            const currentSize = parseFloat(getComputedStyle(yesBtn2).fontSize);
+            yesBtn2.style.fontSize = (currentSize + 5) + 'px';
+            
+            // Move No button randomly
+            const x = Math.random() * (window.innerWidth - 200);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn2.style.position = 'absolute';
+            noBtn2.style.left = x + 'px';
+            noBtn2.style.top = y + 'px';
+            
+            // Make Yes button more prominent
+            yesBtn2.style.transform = `scale(${1 + noClickCount2 * 0.1})`;
+        });
+        
+        // Page 7: Yes/No buttons
+        const yesBtn3 = document.getElementById('yesBtn3');
+        const noBtn3 = document.getElementById('noBtn3');
+        let noClickCount3 = 0;
+
+        yesBtn3.addEventListener('click', () => {
+            showPage('page8');
+        });
+
+        noBtn3.addEventListener('click', () => {
+            noClickCount3++;
+            
+            // Increase Yes button size
+            const currentSize = parseFloat(getComputedStyle(yesBtn3).fontSize);
+            yesBtn3.style.fontSize = (currentSize + 5) + 'px';
+            
+            // Move No button randomly
+            const x = Math.random() * (window.innerWidth - 200);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn3.style.position = 'absolute';
+            noBtn3.style.left = x + 'px';
+            noBtn3.style.top = y + 'px';
+            
+            // Make Yes button more prominent
+            yesBtn3.style.transform = `scale(${1 + noClickCount3 * 0.1})`;
+        });
+
+        // CUSTOMIZATION INSTRUCTIONS:
+        // 1. Replace the letter content in the 'letterContent' div (around line 310)
+        // 2. To add her photo: Add this line in the style for .photo-placeholder:
+        //    background-image: url('your-photo.jpg');
+        //    background-size: cover;
+        // 3. Change the photo text by editing the text in 'photoText' div (around line 325)
+        // 4. Customize the question on page 4 by editing the h2 text with id="customQuestion" (around line 336)
+    </script>
+</body>
+</html>
